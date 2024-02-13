@@ -4,7 +4,7 @@ class DBClient {
   /**
    * Initializes a new instance of DBClient
    */
-  constructor () {
+  constructor() {
     const HOST = process.env.DB_HOST || 'localhost';
     const PORT = process.env.BD_PORT || 27017;
     const DATABASE = process.env.DB_DATABASE || 'files_manager';
@@ -19,7 +19,7 @@ class DBClient {
    * Check mongodb client's connection status
    * @returns {boolean} mongoClient connection status
    */
-  isAlive () {
+  isAlive() {
     return this.mongoClient.isConnected();
   }
 
@@ -27,12 +27,12 @@ class DBClient {
    * Retrieves specified collection from database
    * @returns {import("mongodb").Collection} - users collection object
    */
-  getCollection (collectionName) {
+  getCollection(collectionName) {
     const collection = this.db.collection(collectionName);
     return collection;
   }
 
-  async nbUsers () {
+  async nbUsers() {
     const usersCollection = this.getCollection('users');
     const numberOfUsers = await usersCollection.countDocuments();
     return numberOfUsers;
@@ -42,7 +42,7 @@ class DBClient {
    * Queries 'files' collection
    * @returns {number} - number of documents in files collection
    */
-  async nbFiles () {
+  async nbFiles() {
     const filesCollection = this.getCollection('files');
     const numberOfFiles = filesCollection.countDocuments();
     return numberOfFiles;
@@ -51,7 +51,7 @@ class DBClient {
   /**
    * Closes connection to mongodb client
    */
-  async close () {
+  async close() {
     await this.mongoClient.close();
   }
 }
